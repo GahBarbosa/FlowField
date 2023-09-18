@@ -132,6 +132,10 @@ document.querySelector('#app').innerHTML = `
     <canvas id="canvas1"></canvas>
     </div>
     <div id="menu" class="hidden">
+    <p>Para as particulas atualizarem, tire os input de foco clicando fora deles,</p>
+    <p> e aperte 'Enter' duas vezes, porque duas vezes? eu juro que quando eu descobrir eu te falo,</p>
+    <p> to trabalhando nisso</p>
+    <br/>
       ${textHtml}
       <br/>
       ${particleHtml}
