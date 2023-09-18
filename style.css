@@ -5,18 +5,64 @@
 }
 
 body {
-    background-color: black;
+    height: 100vh;
+    width: 100vw;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    -webkit-font-smoothing: antialiased;
+}
+
+#container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
 }
 
 canvas {
-    border: 10px solid black;
+    border: 1px solid white;
     background-color: black;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    position: absolute;
+    z-index: 1;
 }
 
-#pattern {
+#menu {
+    position: absolute;
+    top: 10vh;
+    left: 1vw;
+    border: 4px solid white;
+    padding: 3em;
+    z-index: 100;
+    background: gray;
+}
+
+.hidden {
     display: none;
+}
+
+.svg {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+}
+
+button {
+    animation: 1.5s ease infinite alternate running;
+    border: none;
+    background: inherit;
+    cursor: pointer;
+    margin: 10px 10px;
+    transition: 0.2s;
+    position: absolute;
+    top: 1vh;
+    left: 1vw;
+    z-index: 100;
+  
+    &:hover {
+      transform: rotate(-100deg);
+    }
 }

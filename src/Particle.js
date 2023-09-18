@@ -1,3 +1,6 @@
+import { particle } from './options.js';
+
+
 export default class Particle {
     constructor(effect){
         this.effect = effect;
@@ -5,14 +8,14 @@ export default class Particle {
         this.y = Math.floor(Math.random() * this.effect.height);
         this.speedX;
         this.speedY;
-        this.speedModifier = Math.floor(Math.random() * 2 + 1);
+        this.speedModifier = Math.floor(Math.random() * particle.speedModifier[1] + particle.speedModifier[0]);
         this.history = [{ x: this.x, y: this.y }];
-        this.maxLength = Math.floor(Math.random() * 60 + 20);
+        this.maxLength = Math.floor(Math.random() * particle.length[1] + particle.length[0]);
         this.angle = 0;
         this.newAngle = 0;
-        this.angleCorrector = Math.random() * 0.5 + 0.1;
+        this.angleCorrector = Math.random() * particle.curve[1] + particle.curve[0];
         this.timer = this.maxLength * 2;
-        this.colors = ['yellow','#16093d','#2d1280','#3a12b3','#4824b5','#7a53ed'];
+        this.colors = particle.colors;
         this.color = this.colors[ Math.floor(Math.random() * this.colors.length) ]
 
     }
@@ -25,11 +28,11 @@ export default class Particle {
         context.strokeStyle = this.color;
         context.stroke();
     }
-    update(){
+    render(){
         this.timer--;
         if (this.timer >= 1 ){
-            let x = Math.floor(this.x / this.effect.cellSize);
-            let y = Math.floor(this.y / this.effect.cellSize);
+            let x = Math.floor(this.x / this.effect.options.cell);
+            let y = Math.floor(this.y / this.effect.options.cell);
             let index = y * this.effect.cols + x ;
             
             if(this.effect.flowField[index]){
@@ -62,8 +65,7 @@ export default class Particle {
     reset(){
         let attempts = 0;
         let resetSuccess = false;
-
-        while (attempts < 2 && !resetSuccess){
+        while (attempts < particle.attempt && !resetSuccess){
             attempts++
             let testIndex = Math.floor(Math.random() * this.effect.flowField.length )
             if(this.effect.flowField[testIndex].alpha > 0){
@@ -74,7 +76,6 @@ export default class Particle {
                 resetSuccess = true
             }
         }
-
         if(!resetSuccess){
             this.x = Math.floor(Math.random() * this.effect.width );
             this.y = Math.floor(Math.random() * this.effect.height);
