@@ -163,50 +163,59 @@ animate()
 setupMenu(document.querySelector('#menu-btn'))
 
 changeCheckbox(document.querySelector('#text-show'),text,'show')
-changeInput(document.querySelector('#text-content'),text,'content')
-changeInput(document.querySelector('#text-font'),text,'font')
-changeArray(document.querySelector('#text-x'),text,'position',0)
-changeArray(document.querySelector('#text-y'),text,'position',1)
-changeArray(document.querySelector('#text-limit-min'),text,'limit',0)
-changeArrayObject(document.querySelector('#text-gradient1'),text,'gradient',0,'hex')
-changeArrayObject(document.querySelector('#text-gradient1-stop1'),text,'gradient',0,'stop')
-changeArrayObject(document.querySelector('#text-gradient2'),text,'gradient',1,'hex')
-changeArrayObject(document.querySelector('#text-gradient1-stop2'),text,'gradient',1,'stop')
-changeArrayObject(document.querySelector('#text-gradient3'),text,'gradient',2,'hex')
-changeArrayObject(document.querySelector('#text-gradient1-stop3'),text,'gradient',2,'stop')
+changeInput(document.querySelector('#text-content'),text,'content','string')
+changeInput(document.querySelector('#text-font'),text,'font','string')
+changeArray(document.querySelector('#text-x'),text,'position','number',0)
+changeArray(document.querySelector('#text-y'),text,'position','number',1)
+changeArray(document.querySelector('#text-limit-min'),text,'limit','number',0)
+changeArrayObject(document.querySelector('#text-gradient1'),text,'gradient','string',0,'hex')
+changeArrayObject(document.querySelector('#text-gradient1-stop1'),text,'gradient','string',0,'stop')
+changeArrayObject(document.querySelector('#text-gradient2'),text,'gradient','string',1,'hex')
+changeArrayObject(document.querySelector('#text-gradient1-stop2'),text,'gradient','string',1,'stop')
+changeArrayObject(document.querySelector('#text-gradient3'),text,'gradient','string',2,'hex')
+changeArrayObject(document.querySelector('#text-gradient1-stop3'),text,'gradient','string',2,'stop')
 
-changeInput(document.querySelector('#particle-number'),particle,'number')
-changeInput(document.querySelector('#particle-line'),particle,'line')
-changeArray(document.querySelector('#particle-color1'),particle,'colors',0)
-changeArray(document.querySelector('#particle-color2'),particle,'colors',1)
-changeArray(document.querySelector('#particle-color3'),particle,'colors',2)
-changeArray(document.querySelector('#particle-speed-min'),particle,'speedModifier',0)
-changeArray(document.querySelector('#particle-speed-max'),particle,'speedModifier',1)
-changeArray(document.querySelector('#particle-length-min'),particle,'length',0)
-changeArray(document.querySelector('#particle-length-max'),particle,'length',1)
-changeArray(document.querySelector('#particle-curve-min'),particle,'curve',0)
-changeArray(document.querySelector('#particle-curve-max'),particle,'curve',1)
-changeInput(document.querySelector('#particle-attempt'),particle,'attempt')
+changeInput(document.querySelector('#particle-number'),particle,'number','number')
+changeInput(document.querySelector('#particle-line'),particle,'line','number')
+changeArray(document.querySelector('#particle-color1'),particle,'colors','string',0)
+changeArray(document.querySelector('#particle-color2'),particle,'colors','string',1)
+changeArray(document.querySelector('#particle-color3'),particle,'colors','string',2)
+changeArray(document.querySelector('#particle-speed-min'),particle,'speedModifier','number',0)
+changeArray(document.querySelector('#particle-speed-max'),particle,'speedModifier','number',1)
+changeArray(document.querySelector('#particle-length-min'),particle,'length','number',0)
+changeArray(document.querySelector('#particle-length-max'),particle,'length','number',1)
+changeArray(document.querySelector('#particle-curve-min'),particle,'curve','number',0)
+changeArray(document.querySelector('#particle-curve-max'),particle,'curve','number',1)
+changeInput(document.querySelector('#particle-attempt'),particle,'attempt','number')
 
 changeCheckbox(document.querySelector('#grid-show'),grid,'show')
-changeInput(document.querySelector('#grid-cell'),options,'cell')
-changeInput(document.querySelector('#grid-color'),grid,'color')
+changeInput(document.querySelector('#grid-cell'),options,'cell','number')
+changeInput(document.querySelector('#grid-color'),grid,'color','string')
 
 
-function changeArrayObject(element,object,property,index,secProperty) {
-  element.addEventListener('change', () => { object[property][index][secProperty] = element.value })
+function changeArrayObject(element, object, property, type, index, secProperty) {
+  element.addEventListener('change', () => {console.log(object,property); object[property][index][secProperty] = normalizeType(type,element.value) })
 }
 
-function changeArray(element,object,property,index) {
-  element.addEventListener('change', () => { console.log(element.value); object[property][index] = Number(element.value) })
+function changeArray(element, object, property, type, index) {
+  element.addEventListener('change', () => {console.log(object,property);  object[property][index] = normalizeType(type,element.value) })
 }
 
 function changeCheckbox(element, object, property) {
   element.addEventListener('change', () =>  object[property] = !object[property])
 }
 
-function changeInput(element, object, property) {
-  element.addEventListener('change', () => { object[property] = element.value })
+function changeInput(element, object, property, type) {
+  element.addEventListener('change', () => {console.log(object,property);  object[property] = normalizeType(type,element.value) })
 }
 
-
+function normalizeType(type, value){
+  switch (type) {
+    case 'string':
+      return String(value)
+    case 'number':
+      return Number(value)
+    default:
+      return value
+  }  
+}
