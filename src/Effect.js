@@ -1,5 +1,5 @@
 import Particle from './Particle.js';
-import { options, size, text, grid, particle } from './options.js';
+import { options, text, grid, particle } from './options.js';
 
 export default class Effect {
     constructor(canvas, ctx){
@@ -12,7 +12,6 @@ export default class Effect {
         this.cols;
         this.flowField = []
         this.options = options
-        this.size = size;
         this.text = text;
         this.grid = grid
         this.particle = particle
@@ -29,8 +28,10 @@ export default class Effect {
     }
     
     init(){
-        // text
-        this.drawText()
+        // image
+        if(this.options.photo){
+            this.drawImage()
+        } 
 
         this.context.lineWidth = this.particle.line
 
@@ -71,17 +72,15 @@ export default class Effect {
 
     update(){
         this.options = options
-        this.size = size;
         this.text = text;
         this.grid = grid;
         this.particle = particle;
-        // this.drawText()
 
         this.init()
     }
 
     drawText(){
-        this.context.font = `${this.text.size} ${this.text.font}`
+        this.context.font = `${this.width * this.text.size}px ${this.text.font}`
         this.context.textAlign = this.text.align
         this.context.textBaseline = this.text.baseAlign
 
@@ -97,7 +96,29 @@ export default class Effect {
               , this.height * this.text.position[1]
               , this.width * this.text.limit[0]
               , this.height * this.text.limit[1]
-            )
+        )
+    }
+
+    drawImage(){
+        console.log(this.options.photo.width,'ih')
+        var hRatio = this.width  / this.options.photo.width    ;
+        var vRatio =  this.height / this.options.photo.height  ;
+        var ratio  = Math.min ( hRatio, vRatio );
+        var centerShift_x = ( this.width - this.options.photo.width*ratio ) / 2;
+        var centerShift_y = ( this.height - this.options.photo.height*ratio ) / 2;  
+        this.context.clearRect(0,0,this.width, this.height);
+        this.context.drawImage(
+            this.options.photo,
+            0,
+            0,
+            this.options.photo.width,
+            this.options.photo.height,
+            centerShift_x,
+            centerShift_y,
+            this.options.photo.width*ratio,
+            this.options.photo.height*ratio
+        );  
+
     }
 
     drawGrid(){
@@ -128,6 +149,7 @@ export default class Effect {
 
     render(){
         if(this.grid.show) this.drawGrid()
+        if(this.options.photoShow && this.options.photo) this.drawImage()
         if(this.text.show) this.drawText()
         this.particles.forEach(particle => {
             particle.draw(this.context)

@@ -8,7 +8,7 @@ export default class Particle {
         this.y = Math.floor(Math.random() * this.effect.height);
         this.speedX;
         this.speedY;
-        this.speedModifier = Math.floor(Math.random() * particle.speedModifier[1] + particle.speedModifier[0]);
+        this.speedModifier = Math.random() * particle.speedModifier[1] + particle.speedModifier[0];
         this.history = [{ x: this.x, y: this.y }];
         this.maxLength = Math.floor(Math.random() * particle.length[1] + particle.length[0]);
         this.angle = 0;
@@ -50,7 +50,7 @@ export default class Particle {
             this.speedY = Math.sin(this.angle);
             this.x += this.speedX * this.speedModifier;
             this.y += this.speedY * this.speedModifier;
-    
+
             this.history.push({x: this.x, y: this.y});
             if(this.history.length > this.maxLength){
                 this.history.shift()

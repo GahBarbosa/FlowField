@@ -8,7 +8,6 @@ import {
   , grid
 } from './src/options'
 
-
 const textHtml = `
 <div>
   <div>
@@ -19,6 +18,11 @@ const textHtml = `
   <div>
     <label for="text-content">Text</label>
     <input id="text-content">
+  </div>
+  <br/>
+  <div>
+    <label for="text-size">Tamanho</label>
+    <input id="text-size" type="range" value="0.5" step="0.1" min="0.1" max="1" />
   </div>
   <br/>
   <div>
@@ -116,6 +120,13 @@ const gridHtml = `
   </div>
 </div>
 `
+const imgHtml = `
+<div class="imagem">
+    <label for="image-show">Show Image</label>
+    <input type="checkbox" id="image-show">
+    <input accept="image/*" type='file' id="imgInp" />
+</div>
+`
 
 document.querySelector('#app').innerHTML = `
   <div id="container">
@@ -136,6 +147,8 @@ document.querySelector('#app').innerHTML = `
     <p> e aperte 'Enter' duas vezes, porque duas vezes? eu juro que quando eu descobrir eu te falo,</p>
     <p> to trabalhando nisso</p>
     <br/>
+      ${imgHtml}
+      <br/>
       ${textHtml}
       <br/>
       ${particleHtml}
@@ -162,9 +175,14 @@ animate()
 
 setupMenu(document.querySelector('#menu-btn'))
 
+changeImage(document.querySelector('#imgInp'),options, 'photo')
+changeCheckbox(document.querySelector('#image-show'),options,'photoShow')
+
+
 changeCheckbox(document.querySelector('#text-show'),text,'show')
 changeInput(document.querySelector('#text-content'),text,'content','string')
 changeInput(document.querySelector('#text-font'),text,'font','string')
+changeInput(document.querySelector('#text-size'),text,'size','number')
 changeArray(document.querySelector('#text-x'),text,'position','number',0)
 changeArray(document.querySelector('#text-y'),text,'position','number',1)
 changeArray(document.querySelector('#text-limit-min'),text,'limit','number',0)
@@ -209,6 +227,13 @@ function changeInput(element, object, property, type) {
   element.addEventListener('change', () => {console.log(object,property);  object[property] = normalizeType(type,element.value) })
 }
 
+function changeImage(element) {
+  element.addEventListener('change', (evt) => {
+    const file = evt.target.files[0]
+    reader(file)
+  })
+}
+
 function normalizeType(type, value){
   switch (type) {
     case 'string':
@@ -218,4 +243,16 @@ function normalizeType(type, value){
     default:
       return value
   }  
+}
+
+function reader(file, gray = true) {
+  const reader = new FileReader()
+  reader.onload = (evt) => {
+      const image = new Image()
+      image.onload = (evt) => {
+        options.photo = image
+      }
+      image.src = evt.target.result
+  }
+  reader.readAsDataURL(file)
 }

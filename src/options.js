@@ -2,7 +2,7 @@ export const text = {
     show : false, // foi
     content: 'Bem vindo', // foi
     font : 'Impact', // foi
-    size : '500px',
+    size : 0.5,
     align : 'center', // nao vou colocar
     baseAlign : 'middle', // nao vou colocar
     position : [0.5,0.5], // percent //foi
@@ -18,8 +18,8 @@ export const particle = {
     number : 3000,
     line: 1,
     colors : ['#b582b5','#800080','#FFFFFF'], 
-    speedModifier : [1,1], // max and min
-    length : [0,100], // max and min
+    speedModifier : [0.5,1], // max and min
+    length : [50,100], // max and min
     curve : [0.01,3], // max and min
     attempt: 10,
 }
@@ -30,11 +30,12 @@ export const size = {
     cell : 10,
 }
 
-
 export const options = {
     width : Math.floor(size.width / size.cell) * size.cell,
     height : Math.floor(size.height / size.cell) * size.cell,
     cell : size.cell,
+    photo: null,
+    photoShow: false,
 }
 
 export const grid = {
