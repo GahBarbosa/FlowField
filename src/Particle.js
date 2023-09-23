@@ -44,6 +44,9 @@ export default class Particle {
                 } else {
                     this.angle = this.newAngle
                 }
+                if(this.effect.flowField[index].alpha > 0){
+                    this.color = this.effect.flowField[index].color
+                }
             }
     
             this.speedX = Math.cos(this.angle);

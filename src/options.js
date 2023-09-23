@@ -19,7 +19,7 @@ export const particle = {
     line: 1,
     colors : ['#b582b5','#800080','#FFFFFF'], 
     speedModifier : [0.5,1], // max and min
-    length : [50,100], // max and min
+    length : [10,20], // max and min
     curve : [0.01,3], // max and min
     attempt: 10,
 }
@@ -41,7 +41,6 @@ export const options = {
 export const grid = {
     show : false,
     color : '#FF0000',
-
 }
 
 export function setupMenu(element) {

@@ -32,7 +32,6 @@ export default class Effect {
         if(this.options.photo){
             this.drawImage()
         } 
-
         this.context.lineWidth = this.particle.line
 
         // flow field
@@ -47,7 +46,7 @@ export default class Effect {
                 const index = ( y * this.width + x ) * 4;
                 const red = pixels[index];
                 const green = pixels[index + 1];
-                const blue = pixels[index] + 2;
+                const blue  = pixels[index + 2];
                 const alpha = pixels[index + 3];
                 const grayscale = ( red + green + blue ) / 3;
                 const colorAngle = Number( (( grayscale / 255 ) * 6.28).toFixed(2) );
@@ -55,7 +54,8 @@ export default class Effect {
                     x: x,
                     y: y,
                     alpha: alpha,
-                    colorAngle: colorAngle 
+                    colorAngle: colorAngle,
+                    color: `rgb(${red}, ${green}, ${blue})`,
                 })
             }            
         }
@@ -100,7 +100,6 @@ export default class Effect {
     }
 
     drawImage(){
-        console.log(this.options.photo.width,'ih')
         var hRatio = this.width  / this.options.photo.width    ;
         var vRatio =  this.height / this.options.photo.height  ;
         var ratio  = Math.min ( hRatio, vRatio );

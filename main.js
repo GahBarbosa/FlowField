@@ -10,22 +10,22 @@ import {
 
 const textHtml = `
 <div>
-  <div>
+  <div class="input-container">
     <label for="text-show">Show Text</label>
     <input type="checkbox" id="text-show">
   </div>
   <br/>
-  <div>
+  <div class="input-container">
     <label for="text-content">Text</label>
-    <input id="text-content">
+    <input id="text-content" class="text-input">
   </div>
   <br/>
-  <div>
+  <div class="input-container">
     <label for="text-size">Tamanho</label>
-    <input id="text-size" type="range" value="0.5" step="0.1" min="0.1" max="1" />
+    <input class="slider" id="text-size" type="range" value="0.5" step="0.1" min="0.1" max="1" />
   </div>
   <br/>
-  <div>
+  <div class="input-container">
     <label for="text-font">Text Font</label>
     <select id="text-font">
       <option value="Impact" selected>Impact</option>
@@ -34,32 +34,35 @@ const textHtml = `
     </select> 
   </div>
   <br/>
-  <div>
+  <div class="input-container">
     <label for="text-x">Posição texto X</label>
-    <input id="text-x" type="range" value="0.5" step="0.1" min="0.1" max="1" />
-    <br />
+    <input class="slider" id="text-x" type="range" value="0.5" step="0.1" min="0.1" max="1" />
+  </div>
+  <br/>
+  <div class="input-container">
     <label for="text-y">Posição texto Y</label>
-    <input id="text-y" type="range" value="0.5" step="0.1" min="0.1" max="1" />
+    <input class="slider" id="text-y" type="range" value="0.5" step="0.1" min="0.1" max="1" />
+  </div>
+  <br/>
+  <div class="input-container">
+    <label for="text-limit-min">Limite do texto X</label>
+    <input class="slider" id="text-limit-min" type="range" value="0.8" step="0.1" min="0.1" max="1" />
   </div>
   <br/>
   <div>
-    <label for="text-limit-min">Limite do texto X</label>
-    <input id="text-limit-min" type="range" value="0.8" step="0.1" min="0.1" max="1" />
-    <br />
-  </div>
-  <div>
-  <label>Gradient</label>
-    <div>
-    <input type="color" id="text-gradient1" value="#ff0000">
-    <input id="text-gradient1-stop1" type="range" value="0.1" step="0.1" min="0.1" max="1" />
+    <label>Gradient</label>
+    <br/><br/>
+    <div class="input-container">
+      <input type="color" id="text-gradient1" value="#ff0000">
+      <input class="slider" id="text-gradient1-stop1" type="range" value="0.1" step="0.1" min="0.1" max="1" />
     </div>
-    <div>
-    <input type="color" id="text-gradient2" value="#ff0000">
-    <input id="text-gradient1-stop2" type="range" value="0.5" step="0.1" min="0.1" max="1" />
+    <div class="input-container">
+      <input type="color" id="text-gradient2" value="#ff0000">
+      <input class="slider" id="text-gradient1-stop2" type="range" value="0.5" step="0.1" min="0.1" max="1" />
     </div>
-    <div>
-    <input type="color" id="text-gradient3" value="#ff0000">
-    <input id="text-gradient1-stop3" type="range" value="0.8" step="0.1" min="0.1" max="1" />
+    <div class="input-container">
+      <input type="color" id="text-gradient3" value="#ff0000">
+      <input class="slider" id="text-gradient1-stop3" type="range" value="0.8" step="0.1" min="0.1" max="1" />
     </div>
   </div>
 <br/>
@@ -68,38 +71,38 @@ const textHtml = `
   
 const particleHtml = `
 <div>
-  <div>
+  <div class="input-container">
     <label for="particle-number">Quantidade de particulas</label>
-    <input id="particle-number" type="range" value="1000" step="1" min="1" max="10000" />
+    <input class="slider" id="particle-number" type="range" value="1000" step="1" min="1" max="3000" />
   </div>
-  <div>
+  <div class="input-container">
     <label for="particle-line">Espessura da linha</label>
-    <input id="particle-line" type="range" value="1" step="0.1" min="0.1" max="5" />
+    <input class="slider" id="particle-line" type="range" value="1" step="0.1" min="0.1" max="5" />
   </div>
-  <div>
+  <div class="input-container">
     <label for="particle-color1">Cores</label>
     <input type="color" id="particle-color1" value="#b582b5">
     <input type="color" id="particle-color2" value="#800080">
     <input type="color" id="particle-color3" value="#FFFFFF">
   </div>
-  <div>
+  <div class="input-container">
     <label for="particle-speed-min">Velocidade</label>
-    <input id="particle-speed-min" type="range" value="1" step="0.1" min="0.1" max="5" />
-    <input id="particle-speed-max" type="range" value="1" step="0.1" min="0.1" max="5" />
+    <input class="slider" id="particle-speed-min" type="range" value="1" step="0.1" min="0.1" max="5" />
+    <input class="slider" id="particle-speed-max" type="range" value="1" step="0.1" min="0.1" max="5" />
   </div>
-  <div>
+  <div class="input-container">
     <label for="particle-length-min">Tamanho da linha</label>
-    <input id="particle-length-min" type="range" value="1" step="1" min="1" max="500" />
-    <input id="particle-length-max" type="range" value="100" step="1" min="1" max="500" />
+    <input class="slider" id="particle-length-min" type="range" value="1" step="1" min="1" max="500" />
+    <input class="slider" id="particle-length-max" type="range" value="100" step="1" min="1" max="500" />
   </div>
-  <div>
+  <div class="input-container">
     <label for="particle-curve-min">Curva da linha</label>
-    <input id="particle-curve-min" type="range" value="0.01" step="0.01" min="0.01" max="3" />
-    <input id="particle-curve-max" type="range" value="3" step="0.01" min="0.01" max="3" />
+    <input class="slider" id="particle-curve-min" type="range" value="0.01" step="0.01" min="0.01" max="3" />
+    <input class="slider" id="particle-curve-max" type="range" value="3" step="0.01" min="0.01" max="3" />
   </div>
-  <div>
+  <div class="input-container">
     <label for="particle-attempt">Tentativas de nascer no texto</label>
-    <input id="particle-attempt" type="range" value="10" step="1" min="0" max="50" />
+    <input class="slider" id="particle-attempt" type="range" value="10" step="1" min="0" max="50" />
   </div>
 </div>
 `
@@ -112,7 +115,7 @@ const gridHtml = `
   </div>
   <div>
     <label for="grid-cell">Pixels por celula</label>
-    <input id="grid-cell" type="range" value="10" step="1" min="0" max="50" />
+    <input class="slider" id="grid-cell" type="range" value="10" step="1" min="0" max="50" />
   </div>
   <div>
     <label for="grid-color">Cor do grid</label>
@@ -120,11 +123,13 @@ const gridHtml = `
   </div>
 </div>
 `
+
 const imgHtml = `
-<div class="imagem">
-    <label for="image-show">Show Image</label>
+<div class='input-container'>
+  <label for="image-show">Mostrar Imagem
     <input type="checkbox" id="image-show">
-    <input accept="image/*" type='file' id="imgInp" />
+  </label>
+  <input accept="image/*" type='file' id="imgInp" />
 </div>
 `
 
@@ -144,15 +149,14 @@ document.querySelector('#app').innerHTML = `
     </div>
     <div id="menu" class="hidden">
     <p>Para as particulas atualizarem, tire os input de foco clicando fora deles,</p>
-    <p> e aperte 'Enter' duas vezes, porque duas vezes? eu juro que quando eu descobrir eu te falo,</p>
-    <p> to trabalhando nisso</p>
+    <p> e aperte 'Enter'</p>
     <br/>
       ${imgHtml}
-      <br/>
+      <hr>
       ${textHtml}
-      <br/>
+      <hr>
       ${particleHtml}
-      <br/>
+      <hr>
       ${gridHtml}
     </div>
   </div>
